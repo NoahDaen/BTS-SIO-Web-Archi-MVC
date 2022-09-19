@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="d-inline-flex justify-content-center align-items-center w-100 h-75">
+        <form method="post" action="/etudiant/add" class="d-inline-flex flex-column border border-1 border-dark p-4 rounded-3 shadow-lg">
+            <label class="form-label">Nom</label>
+            <input class="form-control" type="text" name="nom" placeholder="Nom..." required>
+            <label class="form-label">Prénom</label>
+            <input class="form-control" type="text" name="prenom" placeholder="Prénom..." required>
+            <label class="form-label">Email</label>
+            <input class="form-control" type="email" name="email" placeholder="Email..." required>
+            {% if errorEmail %}
+                <p class="text-danger fw-bold">Il y'a déja un compte à cette email !</p>
+            {% endif %}
+            <label class="form-label">Pseudonyme de connexion</label>
+            <label>
+                <input class="form-control" type="text" name="login" placeholder="Pseudonyme..." required>
+            </label>
+            {% if errorLogin %}
+                <p class="text-danger fw-bold">Pseudonyme déja utilisé !</p>
+            {% endif %}
+            <label class="form-label">Mot de passe</label>
+            <input class="form-control" type="password" name="motDePasse" placeholder="Mot de passe..." required>
+            <button class="btn-primary rounded-3 align-self-center mt-3" type="submit">Ajouter</button>
+        </form>
+    </div>
+{% endblock %}

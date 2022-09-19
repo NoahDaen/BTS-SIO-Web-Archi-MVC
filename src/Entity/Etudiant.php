@@ -4,7 +4,7 @@ namespace Quizz\Entity;
 
 class Etudiant
 {
-    private $idEtudiant = 0;
+    private $idEtudiant;
     private $login = "";
     private $motDePasse = "";
     private $nom = "";

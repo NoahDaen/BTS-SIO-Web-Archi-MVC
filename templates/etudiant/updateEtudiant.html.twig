@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if errorEmail %}
+        <p class="text-danger fw-bold">Il y'a déja un compte à cette email !</p>
+    {% endif %}
+    {% if errorLogin %}
+        <p class="text-danger fw-bold">Pseudonyme déja utilisé !</p>
+    {% endif %}
+    <form action="/etudiant/{{ etudiant.getIdEtudiant }}/update" method="post" class="d-inline-flex w-100 flex-column">
+        <table class="table">
+            <thead class="table-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Login</th>
+                <th>E-mail</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-light">
+                <td><input type="text" value="{{ etudiant.getNom }}" name="nom"></td>
+                <td><input type="text" value="{{ etudiant.getPrenom }}" name="prenom"></td>
+                <td><input type="text" value="{{ etudiant.getLogin }}" name="login"></td>
+                <td><input type="email" value="{{ etudiant.getEmail }}" name="email"></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="align-self-start btn-primary rounded-3 p-1" type="submit">Modifier</button>
+    </form>
+{% endblock %}

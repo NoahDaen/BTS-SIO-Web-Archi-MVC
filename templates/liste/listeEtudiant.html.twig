@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+{% if post == false %}
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th class="">Identifiant</th>
+            <th class="">Nom</th>
+            <th class="">Prénom</th>
+            <th class="">Login</th>
+            <th class="">E-mail</th>
+            <th class="">Voir l'étudiant</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in tabEtudiants %}
+            <tr class="table-light">
+                <td>{{ etudiant.getIdEtudiant }}</td>
+                <td>{{ etudiant.getNom }}</td>
+                <td>{{ etudiant.getPrenom }}</td>
+                <td>{{ etudiant.getLogin }}</td>
+                <td>{{ etudiant.getEmail }}</td>
+                <td class="">
+                    <a href="/etudiant/{{ etudiant.getIdEtudiant }}"><button type="submit" class="btn-primary rounded-3">Accéder</button></a>
+{#                    <form action="/etudiant" method="post">#}
+{#                        <button class="rounded-3 btn-danger p-2" type="submit" name="delete" value="{{ etudiant.getIdEtudiant }}">#}
+{#                            Supprimer#}
+{#                        </button>#}
+{#                    </form>#}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="/etudiant/add"><button class="btn-primary">Ajouter un étudiant</button></a>
+    {% else %}
+    {% if not delete %}
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Login</th>
+                    <th>E-mail</th>
+                    <th>Supprimer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="table-light">
+                    <td class="">{{ etudiant.getIdEtudiant }}</td>
+                    <td class="">{{ etudiant.getNom }}</td>
+                    <td class="">{{ etudiant.getPrenom }}</td>
+                    <td class="">{{ etudiant.getLogin }}</td>
+                    <td class="">{{ etudiant.getEmail }}</td>
+                    <td class="">
+                        <form action="/etudiant" method="post">
+                            <button class="rounded-3 btn-danger p-1" type="submit" name="delete" value="{{ etudiant.getIdEtudiant }}">
+                                Supprimer
+                            </button>
+                        </form>
+                        <a href="/etudiant/{{ etudiant.idEtudiant }}/update"><button class="align-self-start btn-primary rounded-3 p-1" type="button">Modifier</button></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="mt-4" href="/etudiant"><button class="btn-primary rounded-3 p">Retour</button></a>
+    {% else %}
+        <div class="flex flex-col items-center h-fit w-full mt-4">
+            <div class="flex flex-col">
+                <p class="text-bold">
+                    Etudiant bien supprimé !
+                </p>
+                <a class="" href="/etudiant">
+                    <button class="bg-blue-500 rounded-lg h-10 w-24 mt-4 ml-4">Retour</button>
+                </a>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+{% endblock %}
