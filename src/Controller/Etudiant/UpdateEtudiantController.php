@@ -35,6 +35,25 @@ class UpdateEtudiantController implements ControllerInterface
         $errorLogin = false;
 
         if (!empty($this->post)) {
+            foreach ($tabEtudiants as $value) {
+                if ($this->post['email'] == $value->getEmail()) {
+                    $errorEmail = true;
+                } elseif ($this->post['login'] == $value->getLogin()) {
+                    $errorLogin = true;
+                }
+            }
+            if ($this->post['email'] == $etudiant->getEmail()){
+                $errorEmail = false;
+            }
+            else{
+                $errorEmail = true;
+            }
+            if ($this->post['login'] == $etudiant->getLogin()){
+                $errorLogin = false;
+            }
+            else{
+                $errorLogin = true;
+            }
             if ($errorEmail == true or $errorLogin == true) {
                 return TwigCore::getEnvironment()->render(
                     'etudiant/updateEtudiant.html.twig',
